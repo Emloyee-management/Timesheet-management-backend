@@ -21,9 +21,6 @@ public class TimesheetController {
     @Resource
     private HttpServletRequest request;
 
-    @Resource
-    MongoTemplate template;
-
 
     @RequestMapping("/timesheet/{userId}")
     public @ResponseBody
@@ -31,9 +28,5 @@ public class TimesheetController {
         List<Timesheet> timesheets = service.findTimesheetByUserId(userId);
         return timesheets;
     }
-    @RequestMapping("/test")
-    String test() {
-        template.insert(new Timesheet());
-        return "!!!";
-    }
+
 }
