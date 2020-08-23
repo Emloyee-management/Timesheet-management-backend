@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "user_collection")
 public class User {
     @Id
-    @Field("_id")
     private String id;
 
     private String username;

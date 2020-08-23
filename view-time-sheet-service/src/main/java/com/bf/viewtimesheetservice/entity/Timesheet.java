@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "timesheet_summary_collection")
 public class Timesheet {
     @Id
-    @Field("_id")
     private String id;
     private String userId;
     private int totalBillingHours;

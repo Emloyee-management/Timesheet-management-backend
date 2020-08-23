@@ -5,9 +5,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "user_collection")
-public class UserProfile {
+public class User {
     @Id
-    @Field("_id")
     private String id;
 
     private String username;
@@ -27,6 +26,14 @@ public class UserProfile {
     private String emergency2Name;
 
     private String emergency2Phone;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     private String token;
 
