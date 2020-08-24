@@ -11,5 +11,9 @@ import java.util.List;
 @Repository
 public interface TimesheetRepository extends MongoRepository<Timesheet, String> {
     List<Timesheet> findByUserId(String userId);
+
+    @Query(value="{'_id':{'$ne':id}}")
+    Timesheet findByShabiId(String id);
+
 }
 
