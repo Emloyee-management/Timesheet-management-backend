@@ -16,7 +16,7 @@ public class JwtUtil {
     }
 
     public static String generateToken(String signingKey, String subject) {
-        long nowMillis = System.currentTimeMillis() - 100000000;
+        long nowMillis = System.currentTimeMillis(); //- 100000000;
         Date now = new Date(nowMillis);
 
         JwtBuilder builder = Jwts.builder()

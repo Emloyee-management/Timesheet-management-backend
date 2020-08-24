@@ -28,8 +28,9 @@ public class CORS implements Filter {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-//        response.reset();
-        if (isCorsRequest(httpRequest)) {
+//        httpResponse.reset();
+        String uri = ((HttpServletRequest) request).getRequestURI();
+        if (!uri.contains("timesheet") && isCorsRequest(httpRequest)) {
             httpResponse.setHeader("Access-Control-Allow-Origin", "*");
             httpResponse.setHeader("Access-Control-Allow-Methods",
                     "POST, GET, PUT, DELETE");
@@ -42,21 +43,18 @@ public class CORS implements Filter {
             if (isPreFlightRequest(httpRequest)) {
                 return;
             }
-            String uri = ((HttpServletRequest) request).getRequestURI();
             if(uri.contains("session-service")) {
                 chain.doFilter(request, response);
                 return;
             }
 //            try {
                 String token = request.getParameter("token"); // get token
-            System.out.println(token);
-                        if (token == null || !JWTUtil.isValid(token)) {
+                System.out.println(token);
+                if (token == null || !JWTUtil.isValid(token)) {
                     System.out.println("token invalid");
                     response.getWriter().write(VALID_ERROR);
                     return;
                 }
-
-
         }
         chain.doFilter(request, response);
     }

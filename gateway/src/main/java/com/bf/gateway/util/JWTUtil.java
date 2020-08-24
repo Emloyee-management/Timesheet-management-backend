@@ -28,7 +28,7 @@ public class JWTUtil {
 //        verifier.verify(token);
         DecodedJWT jwt = JWT.decode(token);
             Date issueAt = jwt.getIssuedAt();
-//            System.out.println(issueAt);
+            System.out.println(issueAt);
         String fromDate = simpleFormat.format(issueAt);
         String toDate = simpleFormat.format(new Date());
         long from = simpleFormat.parse(fromDate).getTime();
@@ -39,7 +39,7 @@ public class JWTUtil {
             return false;
         } catch (JWTVerificationException | ParseException exception){
             //Invalid signature/claims
-            System.out.println("invalid");
+//            System.out.println("invalid");
             return false;
         }
 
