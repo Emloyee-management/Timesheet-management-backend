@@ -44,6 +44,7 @@ public class TimesheetController {
 
     @RequestMapping("/editComment")
     boolean editComment(@RequestParam("id") String id, @RequestParam("comment") String comment) {
+        System.out.println(id);
         try {
             editTimeSheetService.updateCommentSheetBySheetId(id, comment);
         }

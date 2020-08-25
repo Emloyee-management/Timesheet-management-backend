@@ -32,7 +32,7 @@ public class TimesheetService {
 
     public Timesheet findTimeSheetBy_Id(String id) {
         ObjectId oid = new ObjectId(id);
-//        System.out.println(oid.getClass() + oid.toString());
+        System.out.println(oid.toString());
         Query query = new Query(Criteria.where("_id").is(oid));
         return template.find(query, Timesheet.class).get(0);
     }

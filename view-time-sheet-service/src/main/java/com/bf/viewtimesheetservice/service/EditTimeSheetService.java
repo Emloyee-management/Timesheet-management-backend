@@ -20,6 +20,9 @@ public class EditTimeSheetService {
     @Resource
     TimesheetRepository timesheetRepository;
 
+    @Resource
+    TimesheetService service;
+
     /**
     * @description: Set all required info by time sheet id
     * @param: [timesheet]
@@ -64,8 +67,9 @@ public class EditTimeSheetService {
     }
 
     public Timesheet updateCommentSheetBySheetId(String id, String comment) {
-        Timesheet temp = timesheetRepository.findByShabiId(id);
-        System.out.println(temp.getTotalBillingHours());
+        Timesheet temp = service.findTimeSheetBy_Id(id);
+        System.out.println(temp);
+//        System.out.println(temp.getTotalBillingHours());
         temp.setComment(comment);
         return repository.save(temp);
     }
