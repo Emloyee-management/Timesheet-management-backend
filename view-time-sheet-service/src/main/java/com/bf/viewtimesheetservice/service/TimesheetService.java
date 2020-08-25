@@ -27,4 +27,9 @@ public class TimesheetService {
     public Timesheet findTimeSheetBy_Id(String id) {
         return timesheetRepository.findByShabiId(id);
     }
+
+    public List<Timesheet> findAllTimeSheet() {
+        return timesheetRepository.findAll();
+    }
+
 }

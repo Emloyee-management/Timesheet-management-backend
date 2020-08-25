@@ -32,4 +32,10 @@ public class TimesheetController {
         return service.findTimeSheetBy_Id(id);
     }
 
+    @RequestMapping("/getAllTimeSheet")
+    List<Timesheet> getALlTimeSheet() {
+        List<Timesheet> timesheets = service.findAllTimeSheet();
+        return timesheets;
+    }
+
 }
