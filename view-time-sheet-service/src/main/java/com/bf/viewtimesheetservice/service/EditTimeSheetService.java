@@ -62,4 +62,11 @@ public class EditTimeSheetService {
 
         return repository.save(temp);
     }
+
+    public Timesheet updateCommentSheetBySheetId(String id, String comment) {
+        Timesheet temp = timesheetRepository.findByShabiId(id);
+        System.out.println(temp.getTotalBillingHours());
+        temp.setComment(comment);
+        return repository.save(temp);
+    }
 }

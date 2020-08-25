@@ -1,6 +1,7 @@
 package com.bf.viewtimesheetservice.controller;
 
 import com.bf.viewtimesheetservice.entity.Timesheet;
+import com.bf.viewtimesheetservice.service.EditTimeSheetService;
 import com.bf.viewtimesheetservice.service.TimesheetService;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ public class TimesheetController {
 
     @Resource
     private TimesheetService service;
+
+    @Resource
+    private EditTimeSheetService editTimeSheetService;
 
     @Resource
     private HttpServletRequest request;
@@ -33,9 +37,21 @@ public class TimesheetController {
     }
 
     @RequestMapping("/getAllTimeSheet")
-    List<Timesheet> getALlTimeSheet() {
+    List<Timesheet> getAllTimeSheet() {
         List<Timesheet> timesheets = service.findAllTimeSheet();
         return timesheets;
+    }
+
+    @RequestMapping("/editComment")
+    boolean editComment(@RequestParam("id") String id, @RequestParam("comment") String comment) {
+        try {
+            editTimeSheetService.updateCommentSheetBySheetId(id, comment);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
     }
 
 }
