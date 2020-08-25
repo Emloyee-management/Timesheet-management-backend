@@ -54,4 +54,16 @@ public class TimesheetController {
         return true;
     }
 
+    @RequestMapping("/createTimeSheet")
+    boolean createTimeSheet(@RequestBody Timesheet timeSheet) {
+        try {
+            service.createTimeSheet(timeSheet);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
+
 }

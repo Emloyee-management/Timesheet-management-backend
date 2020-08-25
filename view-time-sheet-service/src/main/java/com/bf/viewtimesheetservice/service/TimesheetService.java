@@ -31,4 +31,14 @@ public class TimesheetService {
         return timesheetRepository.findAll();
     }
 
+    public boolean createTimeSheet(Timesheet timesheet) {
+        try {
+             timesheetRepository.save(timesheet);
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
 }
