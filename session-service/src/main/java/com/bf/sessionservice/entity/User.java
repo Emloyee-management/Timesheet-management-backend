@@ -30,6 +30,16 @@ public class User {
 
     private String token;
 
+    private String scope;
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
     public String getToken() {
         return token;
     }

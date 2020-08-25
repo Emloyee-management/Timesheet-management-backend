@@ -1,5 +1,6 @@
 package com.bf.gateway.config;
 
+import com.bf.gateway.util.JWTUtil;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 
@@ -7,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 /**
  * @description:
@@ -15,6 +17,7 @@ import java.io.IOException;
  */
 @Configuration
 public class CORS implements Filter {
+    private static final String VALID_ERROR = "{\"code\": \"6000\",\"message\": \"TOKEN validate failed!\"}";
 
     public static final String ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
 
@@ -25,8 +28,9 @@ public class CORS implements Filter {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-
-        if (isCorsRequest(httpRequest)) {
+//        httpResponse.reset();
+        String uri = ((HttpServletRequest) request).getRequestURI();
+        if (!uri.contains("timesheet") && !uri.contains("editComment") && isCorsRequest(httpRequest)) {
             httpResponse.setHeader("Access-Control-Allow-Origin", "*");
             httpResponse.setHeader("Access-Control-Allow-Methods",
                     "POST, GET, PUT, DELETE");
@@ -39,6 +43,18 @@ public class CORS implements Filter {
             if (isPreFlightRequest(httpRequest)) {
                 return;
             }
+            if(uri.contains("session-service")) {
+                chain.doFilter(request, response);
+                return;
+            }
+//            try {
+                String token = request.getParameter("token"); // get token
+                System.out.println(token);
+                if (token == null || !JWTUtil.isValid(token)) {
+                    System.out.println("token invalid");
+                    response.getWriter().write(VALID_ERROR);
+                    return;
+                }
         }
         chain.doFilter(request, response);
     }

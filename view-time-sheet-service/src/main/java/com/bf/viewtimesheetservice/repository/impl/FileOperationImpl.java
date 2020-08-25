@@ -31,6 +31,7 @@ public class FileOperationImpl implements FileOperationDao {
     @Override
     public boolean uploadFile(MultipartFile multipartFile, String id) throws IOException {
         String uploadedFileName = "";
+        System.out.println(multipartFile);
         String[] allowTypes = new String[] {"pdf", "jpg", "jpeg", "xls", "docx", "doc"};
         String classPath = ts.Trim(Constant.CLASS_PATH);
             if (multipartFile != null) {
@@ -43,6 +44,7 @@ public class FileOperationImpl implements FileOperationDao {
                     return false;
                 String filepath = classPath + "\\" + id;
                 File file = new File(filepath);
+                System.out.println(filepath);
                 if (!file.exists()) {
                     file.mkdirs();
                 }
