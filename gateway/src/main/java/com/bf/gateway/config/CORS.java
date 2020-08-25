@@ -30,7 +30,7 @@ public class CORS implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 //        httpResponse.reset();
         String uri = ((HttpServletRequest) request).getRequestURI();
-        if (!uri.contains("timesheet") && isCorsRequest(httpRequest)) {
+        if (!uri.contains("timesheet") && !uri.contains("editComment") && isCorsRequest(httpRequest)) {
             httpResponse.setHeader("Access-Control-Allow-Origin", "*");
             httpResponse.setHeader("Access-Control-Allow-Methods",
                     "POST, GET, PUT, DELETE");
